@@ -24,12 +24,12 @@ public class ArticleController {
 		return articleService.readAllArticle();
 	}
 
-	@GetMapping("/articles/{articleId}")
+	@GetMapping("/article/{articleId}")
 	public Article readArticle(@PathVariable Long articleId){
 		return articleService.readArticle(articleId);
 	}
 
-	@PostMapping("/auth/articles")
+	@PostMapping("/auth/article")
 	public Article creatArticle(@RequestBody ArticleRequestDto articleRequestDto){
 		return articleService.creatArticle(articleRequestDto);
 	}
@@ -39,12 +39,12 @@ public class ArticleController {
 //		return s3Uploader.upload(articleId, multipartFile, "img") + " 등록 완료.";
 //	}
 
-	@PatchMapping("/auth/articles/{articleId}")
-	public Article updateArticle(@PathVariable Long articleId, @RequestBody ArticleRequestDto articleRequestDto){
+	@PatchMapping("/auth/article/{articleId}")
+	public String updateArticle(@PathVariable Long articleId, @RequestBody ArticleRequestDto articleRequestDto){
 		return articleService.updateArticle(articleId, articleRequestDto);
 	}
 
-	@DeleteMapping("/auth/articles/{articleId}")
+	@DeleteMapping("/auth/article/{articleId}")
 	public String deleteArticle(@PathVariable Long articleId){
 		return articleService.deleteArticle(articleId);
 	}

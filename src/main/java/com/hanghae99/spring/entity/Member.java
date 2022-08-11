@@ -2,6 +2,7 @@ package com.hanghae99.spring.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.hanghae99.spring.util.Timestamped;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "member")
 @Entity
-public class Member {
+public class Member extends Timestamped {
 
     @Id
     @Column(name = "member_id")
@@ -53,5 +54,12 @@ public class Member {
     }
     public void removeArticle(Article article) {
         this.articleList.remove(article);
+    }
+
+    public void addComment(Comment comment) {
+        this.commentList.add(comment);
+    }
+    public void removeComment(Comment comment) {
+        this.commentList.remove(comment);
     }
 }

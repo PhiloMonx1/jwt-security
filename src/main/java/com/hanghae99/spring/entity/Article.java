@@ -58,4 +58,15 @@ public class Article extends Timestamped {
 		this.title = articleRequestDto.getTitle();
 		this.content = articleRequestDto.getContent();
 	}
+
+	public void addComment(Comment comment) {
+		this.commentList.add(comment);
+	}
+	public void removeComment(Comment comment) {
+		this.commentList.remove(comment);
+	}
+
+	public void setCommentCount(int commentListSize) {
+		this.commentCnt = commentListSize;
+	}
 }
