@@ -72,7 +72,17 @@ public class Article extends Timestamped {
 		this.commentList.remove(comment);
 	}
 
+	public void addHeart(Heart heart) {
+		this.heartList.add(heart);
+	}
+	public void removeHeart(Heart heart) {
+		this.heartList.remove(heart);
+	}
+
 	public void setCommentCount(int commentListSize) {
 		this.commentCnt = commentListSize;
+	}
+	public void setHeartCnt(int heartListSize) {
+		this.heartCnt = heartListSize;
 	}
 }

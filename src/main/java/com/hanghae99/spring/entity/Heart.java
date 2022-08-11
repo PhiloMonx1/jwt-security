@@ -25,4 +25,14 @@ public class Heart {
 	@ManyToOne
 	@JoinColumn(name = "COMMENT_ID")
 	private Comment comment;
+
+	public Heart(Member member, Article article) {
+		this.member = member;
+		this.article = article;
+	}
+	public Heart(Member member, Comment comment) {
+		this.member = member;
+		this.comment = comment;
+	}
+
 }

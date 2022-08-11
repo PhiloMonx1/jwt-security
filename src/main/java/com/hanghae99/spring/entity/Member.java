@@ -62,4 +62,11 @@ public class Member extends Timestamped {
     public void removeComment(Comment comment) {
         this.commentList.remove(comment);
     }
+
+    public void addHeart(Heart heart) {
+        this.heartList.add(heart);
+    }
+    public void removeHeart(Heart heart) {
+        this.heartList.remove(heart);
+    }
 }
