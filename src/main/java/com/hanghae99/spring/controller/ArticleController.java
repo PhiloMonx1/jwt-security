@@ -41,12 +41,6 @@ public class ArticleController {
 
 	@PostMapping("/auth/article/image/{articleId}")
 	public String upload(@PathVariable Long articleId, MultipartFile multipartFile, String dirName) throws IOException {
-
-		System.out.println(articleId);
-
-		System.out.println(multipartFile);
-		System.out.println(multipartFile.getName());
-
 		return s3Uploader.upload(articleId, multipartFile, "img");
 	}
 
