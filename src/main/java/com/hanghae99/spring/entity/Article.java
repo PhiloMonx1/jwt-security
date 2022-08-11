@@ -30,6 +30,8 @@ public class Article extends Timestamped {
 	@Column(nullable = false)
 	private String content;
 
+	private String imgUrl;
+
 	private int heartCnt;
 	private int commentCnt;
 
@@ -57,6 +59,10 @@ public class Article extends Timestamped {
 	public void updatePost(ArticleRequestDto articleRequestDto) {
 		this.title = articleRequestDto.getTitle();
 		this.content = articleRequestDto.getContent();
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 	public void addComment(Comment comment) {

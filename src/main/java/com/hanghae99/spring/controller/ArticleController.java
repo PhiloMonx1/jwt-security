@@ -1,22 +1,28 @@
 package com.hanghae99.spring.controller;
 
+import com.hanghae99.spring.S3.S3Uploader;
 import com.hanghae99.spring.controller.dto.ArticleRequestDto;
 import com.hanghae99.spring.controller.dto.ArticleResponseDto;
 import com.hanghae99.spring.entity.Article;
 import com.hanghae99.spring.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class ArticleController {
 	private final ArticleService articleService;
+	private final S3Uploader s3Uploader;
 
 	@Autowired
-	public ArticleController(ArticleService articleService) {
+	public ArticleController(ArticleService articleService, S3Uploader s3Uploader) {
 		this.articleService = articleService;
+		this.s3Uploader = s3Uploader;
 	}
 
 	@GetMapping("/articles")
@@ -34,10 +40,16 @@ public class ArticleController {
 		return articleService.creatArticle(articleRequestDto);
 	}
 
-//	@PostMapping("/auth/articles/image/{articleId}")
-//	public String upload(@PathVariable Long articleId, MultipartFile multipartFile, String dirName) throws IOException {
-//		return s3Uploader.upload(articleId, multipartFile, "img") + " 등록 완료.";
-//	}
+	@PostMapping("/auth/article/image/{articleId}")
+	public String upload(@PathVariable Long articleId, MultipartFile multipartFile, String dirName) throws IOException {
+
+		System.out.println(articleId);
+
+		System.out.println(multipartFile);
+		System.out.println(multipartFile.getName());
+
+		return s3Uploader.upload(articleId, multipartFile, "img");
+	}
 
 	@PatchMapping("/auth/article/{articleId}")
 	public String updateArticle(@PathVariable Long articleId, @RequestBody ArticleRequestDto articleRequestDto){
