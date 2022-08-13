@@ -30,11 +30,11 @@ public class Member extends Timestamped {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
-    @OneToMany//(mappedBy = "member")
+    @OneToMany//(mappedBy = "member") -> 조회가 많이 일어나고 데이터의 생성 삭제가 별로 일어나지 않는 경우
     @JsonManagedReference
     private List<Article> articleList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member")// -> 생성 삭제가 많이 일어나는 경우
     @JsonManagedReference
     private List<Comment> commentList = new ArrayList<>();
 

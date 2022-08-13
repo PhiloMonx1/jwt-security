@@ -36,6 +36,7 @@ public class ArticleController {
 
 	@PostMapping("/auth/article")
 	public Article creatArticle(@RequestBody ArticleRequestDto articleRequestDto){
+
 		return articleService.creatArticle(articleRequestDto);
 	}
 

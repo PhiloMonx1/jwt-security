@@ -43,8 +43,7 @@ public class ArticleService {
 	}
 
 	public Article creatArticle(ArticleRequestDto articleRequestDto) {
-		Member member = memberRepository.findById(memberService.getSigninUserId())
-				.orElseThrow(()-> new IllegalArgumentException("잘못된 사용자입니다. 다시 로그인 후 시도해주세요."));
+		Member member = memberService.getSinginUser();
 		Article article = new Article(articleRequestDto, member);
 
 		member.addArticle(article);
