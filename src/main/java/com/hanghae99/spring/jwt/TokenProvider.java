@@ -59,6 +59,12 @@ public class TokenProvider {
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
 
+//       return Jwts.builder()
+//              .setHeaderParam("typ", BEARER_TYPE)
+//              .claim(AUTHORITIES_KEY, authorities)
+//              .setExpiration(accessTokenExpiresIn)
+//              .compact();
+
         return TokenDto.builder()
                 .grantType(BEARER_TYPE)
                 .accessToken(accessToken)
@@ -67,6 +73,10 @@ public class TokenProvider {
                 .build();
     }
 
+    // accessToken에서 인증 정보 조회
+    // 토큰에 담겨 있는 정보를 이용해 Authentication 객체를 리턴하는 메소드이다.
+    // createToken 과 정확히 반대의 역할을 해주는 메소드이다.
+    // 토큰을 parameter 로 받아서 토큰으로 claim 을 만들고, 최종적으로는 Authentication 객체를 리턴한다.
     public Authentication getAuthentication(String accessToken) {
         // 토큰 복호화
         Claims claims = parseClaims(accessToken);
@@ -92,15 +102,14 @@ public class TokenProvider {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-            log.info("잘못된 JWT 서명입니다.");
-        } catch (ExpiredJwtException e) {
-            log.info("만료된 JWT 토큰입니다.");
+            throw new MalformedJwtException("잘못된 JWT 서명입니다.");
         } catch (UnsupportedJwtException e) {
-            log.info("지원되지 않는 JWT 토큰입니다.");
+            throw new UnsupportedJwtException("지원되지 않는 JWT 토큰입니다.");
         } catch (IllegalArgumentException e) {
-            log.info("JWT 토큰이 잘못되었습니다.");
+            throw new IllegalArgumentException("JWT 토큰이 잘못되었습니다.");
+        } catch (ExpiredJwtException e){
+            throw new ExpiredJwtException(Jwts.header(),Jwts.claims(),"만료된 토큰입니다");
         }
-        return false;
     }
 
     private Claims parseClaims(String accessToken) {

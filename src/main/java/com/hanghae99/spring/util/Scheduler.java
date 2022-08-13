@@ -23,7 +23,7 @@ public class Scheduler {
 	}
 
 	@Transactional
-	@Scheduled(cron = "30 * * * * *")
+	@Scheduled(cron = "* * 1 * * *")
 	public void updatePrice() {
 		System.out.println("스케줄러 작동");
 		List<Article> articleList = articleRepository.findAll();
