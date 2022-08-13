@@ -15,7 +15,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public Long getSigninUserId(){
-        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName(); // pk값
         return Long.valueOf(userId);
     }
     public Member getSinginUser(){
