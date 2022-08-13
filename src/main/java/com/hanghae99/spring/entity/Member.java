@@ -30,7 +30,7 @@ public class Member extends Timestamped {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany//(mappedBy = "member")
     @JsonManagedReference
     private List<Article> articleList = new ArrayList<>();
 
